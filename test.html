@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+            window.onload = function () {
+                    var chart = new CanvasJS.Chart("chartContainer",
+                    {
+                            title:{
+                                    text: "NOx"
+                            },
+                            exportEnabled: false,
+                            data: [
+                            {       
+                                    type: "pie",
+                                    showInLegend: false,
+                                    toolTipContent: "{label}: <strong>{y}%</strong>",
+                                    indexLabel: "{label}",
+                                    dataPoints: [
+                                            {  y: 2, color: '#b4ff5a', label: "Agriculture, sylviculture et nature" },
+                                            {  y: 5, color: '#ff6600', label: "Industrie et traitement des déchets" },
+                                            {  y: 1, color: '#fffc98', label: "Production et distribution d'énergie" },
+                                            {  y: 16, color: '#ffcb04', label: "Résidentiel et tertiaire"},
+                                            {  y: 2, color: '#96d0ff', label: "Transports non routiers" },
+                                            {  y: 75, color: '#1077b2', label: "Transports routiers"}
+                                    ]
+                    }
+                    ]
+                    });
+                    chart.render();
+            };
+            </script>
+            <script type="text/javascript" src="js/canvasjs.min.js"></script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <div id="chartContainer" style="height: 300px; width: 50%;"></div>
+    </body>
+</html>
+

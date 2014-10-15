@@ -39,8 +39,14 @@ if (!$annee) {
 
 // Lecture du nom de l'entité geographique
 $reponse = mysql_query("SELECT `name` FROM `".$level_geo."` WHERE `id` = '".$geo."'");
-$nom_geo = $PC[$level_geo]['nom']." de ".mysql_result($reponse, 0);
-echo "<p class='geo'>".$nom_geo."</p>\n";
+$nom_geo = $PC[$level_geo]['nom']." ".mysql_result($reponse, 0);
+echo "        <!-- Title -->\n";
+echo "        <div class=\"row\">\n";
+echo "            <div class=\"col-lg-12\">\n";
+echo "                <h3 class='emi_title'>".$nom_geo."</h3>\n";
+echo "            </div>\n";
+echo "        </div>\n";
+echo "        <!-- /.row -->\n";
 	
 // Variables intermédiaires
 $colonne = $PC[$level_geo]['colonne']; // lecture de la colonne de sélection
@@ -105,14 +111,16 @@ if ($with_pcdep) {
 else {
     $dep = null;
 }
-	
+
+// Composition de la page
+echo "        <!-- Page Features -->\n";
+echo "        <div class=\"row text-center\">\n";
+
 // Affiche une cellules pour chaque polluant
 foreach($list_polluants as $ipol => $pol) {
     
     // Information sur le polluant
     $tpol = $POLLUANTS[$pol];
-		
-    echo "<div class='emissions'>\n";
 		
     // Calcul des %dep et %reg
     if ($with_pcreg) {
@@ -135,24 +143,32 @@ foreach($list_polluants as $ipol => $pol) {
         }
     }
 		
-    echo "<table class='tabpol'>\n<tr>\n<td width=300 class='centre'><p><span class='pol'>".$tpol['html']."</span><br /><span class='pol_def'>(".$tpol['nom'].")</span><p>";
-		
     // Convertion quantité / unité
     $sumkg2o = kg2o($sum[$pol], $tpol['unite']);
 			
-    echo "<p><span class='quantite'>".number_format($sumkg2o[0], 0, ',', ' ')." ".$sumkg2o[1]."</span><br /><br />\n";
+    // HTML
+    echo "            <div class=\"col-md-6 col-sm-6 hero-feature\">\n";
+    echo "                <div class=\"thumbnail\" style=\"text-align: center;\">\n";
+    echo "                    <div class=\"caption\">\n";
+    echo "                        <h3><span class=\"label label-default\">".$tpol['html']."</span></h3>\n";
+    echo "                        <p><b>".$tpol['nom']."</b></p>\n";
+    echo "                        <div class='emi_src'>Inventaire des &eacute;missions ".$annee.", ".$AASQA['nom']."</div>\n";
+    echo "                    </div>\n";
+    echo "                    <div id=\"chart_".$ipol."\" style=\"height: 300px; width: 90%;\"></div>\n";
+    echo "                    <h3 class='emi_quantite'>".number_format($sumkg2o[0], 0, ',', ' ')." ".$sumkg2o[1]."</h3>\n";
+    
     if ($with_pcdep || $with_pcreg) {
-        echo "<span class='part'>soit...<br />";
+        echo "                    <p>";
         if ($with_pcdep) {
             echo number_format($pcDep[$pol][$code_dep], $precisionDep, ',', ' ')." % du d&eacute;partement<br />";
         }
         if ($with_pcreg) {
             echo number_format($pcReg[$pol], $precisionReg, ',', ' ')." % de la r&eacute;gion";
         }
-        echo "</span>";
+        echo "</p>";
     }
-    echo "</p></td>\n";
-    echo "<td class='centre'>\n";
+    echo "                </div>\n";
+    echo "            </div>\n";
 		
     // Mise en forme des données
     $gvaleurs = array();
@@ -161,51 +177,43 @@ foreach($list_polluants as $ipol => $pol) {
     foreach($data[$pol] as $key => $val) {
         $gvaleurs[] = round($val); 
         $glegend[] = $key; //utf8_encode($key);
-        $gpourcent[] = round(($val/$sum[$pol])*100) >= 1 ? round(($val/$sum[$pol])*100)."%" : "" ;
+        $gpourcent[] = round(($val/$sum[$pol])*100);
     }
           
-    echo "<div id='chart_".$ipol."' class='chart'></div>\n";
-    echo "<div class='src'>Inventaire des &eacute;missions ".$annee.", ".$AASQA['nom']."</div>\n";
     ?>
 
-    <script>
+            <script>
 
-    var chart = c3.generate({
-        bindto: '#chart_<?php echo $ipol; ?>',
-        legend: {
-            position: 'right'
-        },
-        data: {
-            columns: [
-                <?php
-                for ($i=0; $i<6; $i++) {
-                    echo "[\"".$glegend[$i]."\", ".$gvaleurs[$i]."],\n";
-                }
+            var chart_<?php echo $ipol; ?> = new CanvasJS.Chart("chart_<?php echo $ipol; ?>",
+                {
+                    exportEnabled: false,
+                    backgroundColor: "",
+                    data: [
+                        {
+                            type: "pie",
+                            startAngle: -90,
+                            showInLegend: false,
+                            toolTipContent: "{label}: <b>{y}%</b>",
+                            indexLabel: "{label}",
+                            indexLabelFontSize: 12,
+                            dataPoints: [
+                                <?php
+                                for ($i=0; $i<6; $i++) {
+                                    echo "{ y: ".$gpourcent[$i].", color: '#".$COULEURS[$i]."', label: \"".$glegend[$i]."\" },\n";
+                                }
+                                ?>
+                            ]
+                        }
+                    ]
+                });
+            chart_<?php echo $ipol; ?>.render();
 
-
-                ?>
-            ],
-            type : 'pie',
-            colors: {
-                <?php
-                for ($i=0; $i<6; $i++) {
-                    echo "\"".$glegend[$i]."\": '#".$COULEURS[$i]."',\n";
-                }
-                ?>
-
-            },
-            color: function (color, d) {
-                return color;
-            }
-        }
-    });
-
-    </script>
+            </script>
 
     <?php
-    echo "</td>\n";
-    echo "</tr>\n</table>\n</div>\n";
 }
+echo "        </div>\n";
+echo "        <!-- /.row -->";
 	
 // Déconnexion à MySQL
 mysql_close();
