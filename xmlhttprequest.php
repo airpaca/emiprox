@@ -1,11 +1,9 @@
 <?php
-session_name('emiprox');
-session_start();
 header('Content-type: text/html; charset=iso-8859-1');
 
 // Ouverture des parametres
-include("parametres.cfg.php");
-include("parametres.mysql.cfg.php");
+include("cfg/parametres.cfg.php");
+include("cfg/parametres.mysql.cfg.php");
 
 // Connection à la base de données
 mysql_connect($MYSQL['host'], $MYSQL['user'], $MYSQL['password']);

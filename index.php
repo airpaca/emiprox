@@ -1,8 +1,8 @@
 <?php
 
 // ouverture des fonctions et parametres
-include("parametres.cfg.php");
-include("parametres.mysql.cfg.php");
+include("cfg/parametres.cfg.php");
+include("cfg/parametres.mysql.cfg.php");
 include("fonctions.inc.php");
 
 // debut de la page HTML

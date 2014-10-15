@@ -22,12 +22,12 @@ echo html_entity_decode($AASQA['nom'])." | ".html_entity_decode($AASQA['web'])."
 	
 	<title>Emiprox | <?php echo $IE['nom']; ?></title>
 	
-	<script type="text/javascript" src="emiprox.js"></script>
+	<script type="text/javascript" src="js/emiprox.js"></script>
 
-        <link rel="stylesheet" href="c3.min.css">
-        <script src="d3.min.js"></script>
-        <script src="c3.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="emiprox.css" media="screen" title="emiprox" />
+        <link rel="stylesheet" href="css/c3.min.css">
+        <script src="js/d3.min.js"></script>
+        <script src="js/c3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/emiprox.css" media="screen" title="emiprox" />
 
 </head>
 

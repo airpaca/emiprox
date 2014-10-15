@@ -1,8 +1,8 @@
 <?php
 
 // Ouverture des fonctions et paramètres
-include("parametres.cfg.php");
-include("parametres.mysql.cfg.php");
+include("cfg/parametres.cfg.php");
+include("cfg/parametres.mysql.cfg.php");
 include("fonctions.inc.php");
 
 // Récupération des données passées dans l'URL ou via le formulaire
