@@ -1,5 +1,5 @@
 Emiprox
 =======
 
-**Interface de consultation des résultats de l'inventaire des émissions**  
+**Interface de consultation des rÃ©sultats de l'inventaire des Ã©missions**  
 
