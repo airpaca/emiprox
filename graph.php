@@ -7,8 +7,8 @@ include("fonctions.inc.php");
 
 // Récupération des données passées dans l'URL ou via le formulaire
 if (array_key_exists('sent', $_POST)) {
-    $level_geo = $_POST['level_geo'];
-    $geo = $_POST['geo'];
+    $level_geo = $_POST['geotyp'];
+    $geo = $_POST['geoid'];
     $annee = $_POST['annee'];
 }
 else {
@@ -23,9 +23,6 @@ $list_polluants = array_keys($POLLUANTS);
 mysql_connect($MYSQL['host'], $MYSQL['user'], $MYSQL['password']);
 mysql_select_db($DB);
 
-// Entete HTML
-include("debut.inc.php");
-
 // Vérification
 if (!$geo) {
     die("cannot find 'geo' arg !");
@@ -36,6 +33,9 @@ if (!$level_geo) {
 if (!$annee) {
     die("cannot find 'annee' arg !");
 }
+
+// Entete HTML
+include("debut.inc.php");
 
 // Lecture du nom de l'entité geographique
 $reponse = mysql_query("SELECT `name` FROM `".$level_geo."` WHERE `id` = '".$geo."'");

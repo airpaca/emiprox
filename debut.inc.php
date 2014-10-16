@@ -24,15 +24,22 @@ echo html_entity_decode($AASQA['nom'])." | ".html_entity_decode($AASQA['web'])."
 	
     <title>Emiprox | <?php echo $IE['nom']; ?></title>
 
+    <!-- JQuery -->
+    <script src="js/jquery-1.11.0.js" type="text/javascript"></script>
+    
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/heroic-features.css" rel="stylesheet">
 
+    <!-- Selectize.js -->
+    <script src="js/selectize.js" type="text/javascript"></script>
+    <link href="css/selectize.css" rel="stylesheet" type="text/css"/>
+    <link href="css/selectize.bootstrap3.css" rel="stylesheet" type="text/css"/>
+    
     <!-- CanvasJS -->
     <script type="text/javascript" src="js/canvasjs.min.js"></script>
 
     <!-- Emiprox -->
-    <script type="text/javascript" src="js/emiprox.js"></script>
     <link rel="stylesheet" type="text/css" href="css/emiprox.css" media="screen" title="emiprox" />
 
 </head>

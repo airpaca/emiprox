@@ -9,13 +9,14 @@ img {border:0 none;}
 input, select { font-size: 12px; border: 1px solid rgb(22, 123, 179); background-color: white; padding: 5px; }
 
 img#logo { margin: 10px; }
-div#attente { border: 1px solid black; width: 30%; padding: 10px; background-color: #FFFFCC; visibility: hidden; }
 div#intro { text-align: justify; width: 60%; padding: 10px; margin-left: auto; margin-right: auto; margin-bottom: 30px; border-left: 1px solid rgb(22, 123, 179);}
-div#form { padding: 40px; }
 div#conditions { font-size: 0.90em; color: #777; text-align: justify; width: 60%; margin-left: auto; margin-right: auto; }
 
 .emi_quantite { font-weight:bolder; font-size: 2em; }
 .emi_title { font-size: 2.5em; }
 .emi_src { color: #aaa; font-size: 11px; margin-bottom: 5px;  }
 .emi_credit { color: #bbb; font-size: 12px; }
+.emi_form { width: 60%; margin-left: auto; margin-right: auto; }
 
+div .form_geonm { font-size: 1em; margin-right: 5px; }
+div .form_geotyp { font-size: 0.85em; opacity: 0.6; }
