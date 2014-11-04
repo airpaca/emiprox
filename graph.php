@@ -52,7 +52,15 @@ echo "        <!-- /.row -->\n";
 $colonne = $PC[$level_geo]['colonne']; // lecture de la colonne de sélection
 $with_pcreg = $PC[$level_geo]['pcreg']; // présence du % région
 $with_pcdep = $PC[$level_geo]['pcdep']; // présence du % département
-	
+
+// Correspondance nom des secteurs
+$sql = "SELECT `name`, `shortname` FROM `".$SECTEUR['tb']."` ORDER BY `id`";
+$sects = array();
+$reponse = mysql_query($sql);
+while($enr = mysql_fetch_array($reponse)) {
+    $sects[$enr[0]] = $enr[1];
+}
+
 // Composition de la requete d'extraction des émissions par secteur 
 $sql = "SELECT g.`name` as `secteur`, ";
 foreach($POLLUANTS as $pol => $tpol) {
@@ -194,12 +202,12 @@ foreach($list_polluants as $ipol => $pol) {
                             startAngle: -90,
                             showInLegend: false,
                             toolTipContent: "{label}: <b>{y}%</b>",
-                            indexLabel: "{label}",
+                            indexLabel: "{shortname}",
                             indexLabelFontSize: 12,
                             dataPoints: [
                                 <?php
                                 for ($i=0; $i<6; $i++) {
-                                    echo "{ y: ".$gpourcent[$i].", color: '#".$COULEURS[$i]."', label: \"".$glegend[$i]."\" },\n";
+                                    echo "{ y: ".$gpourcent[$i].", color: '#".$COULEURS[$i]."', label: \"".$glegend[$i]."\", shortname: \"".$sects[$glegend[$i]]."\" },\n";
                                 }
                                 ?>
                             ]

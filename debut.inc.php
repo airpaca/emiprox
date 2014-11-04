@@ -51,12 +51,12 @@ echo html_entity_decode($AASQA['nom'])." | ".html_entity_decode($AASQA['web'])."
         
         <!-- Header -->
         <a href='<?php echo $AASQA['web']; ?>'><img id="logo" src='img/logo.png'></a>
-        <h1>Emiprox | <?php echo $IE['nom']; ?></h1>
+        <h1>Emiprox<br /><?php echo $IE['nom']; ?></h1>
 
-        <div id="intro">
-            <p class='intro'>
-                <?php echo $INTRO; ?>
-            </p>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <p class='introduction'><?php echo $INTRO; ?></p>
+            </div>
         </div>
     
     
