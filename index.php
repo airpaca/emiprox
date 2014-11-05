@@ -33,7 +33,7 @@ mysql_connect($MYSQL['host'], $MYSQL['user'], $MYSQL['password']);
 mysql_select_db($DB);
 $geos = array();
 foreach ($PC as $lvl => $lvlnfo) {
-    $sql = "SELECT `id`, `name` FROM `".$lvl."` WHERE left(`name`, 1) != '(' ORDER BY `name`";
+    $sql = "SELECT `id`, `name` FROM `grp_geo_".$lvl."` WHERE left(`name`, 1) != '(' ORDER BY `name`";
     $reponse = mysql_query($sql);
     while($enr = mysql_fetch_array($reponse)) {
         $geos[$lvl][$enr['id']] = $enr['name'];

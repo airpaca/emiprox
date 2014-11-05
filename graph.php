@@ -13,7 +13,7 @@ if (array_key_exists('sent', $_POST)) {
 }
 else {
     $geo = $_GET['geo'];
-    $level_geo = $_GET['level_geo'];
+    $level_geo = $_GET['lvl'];
     $annee = $_GET['annee'];
 }
 $list_polluants = array_keys($POLLUANTS);
@@ -34,11 +34,16 @@ if (!$annee) {
     die("cannot find 'annee' arg !");
 }
 
+// Hack code commune !
+if (array_key_exists('geo', $_GET) && $level_geo == 'commune') {
+    $geo = '193'.$geo;
+}
+
 // Entete HTML
 include("debut.inc.php");
 
 // Lecture du nom de l'entité geographique
-$reponse = mysql_query("SELECT `name` FROM `".$level_geo."` WHERE `id` = '".$geo."'");
+$reponse = mysql_query("SELECT `name` FROM `grp_geo_".$level_geo."` WHERE `id` = '".$geo."'");
 $nom_geo = $PC[$level_geo]['nom']." ".mysql_result($reponse, 0);
 echo "        <!-- Title -->\n";
 echo "        <div class=\"row\">\n";

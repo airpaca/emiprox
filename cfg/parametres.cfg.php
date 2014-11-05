@@ -89,37 +89,37 @@ $COULEURS = array('b4ff5a', 'FF6600', 'FFFC98', 'FFCB04', '96D0FF', '1077B2');
 
 // Configuration des niveaux géographiques
 $PC = array(
-    'grp_geo_reg' => array(
+    'reg' => array(
         'nom' => 'R&eacute;gion',
         'colonne' => "id_geo_reg",
         'pcreg' => false,
         'pcdep' => false
     ),
-    'grp_geo_dep' => array(
+    'dep' => array(
         'nom' => 'D&eacute;partement',
         'colonne' => "id_geo_dep",
         'pcreg' => true,
         'pcdep' => false
     ),
-    'grp_geo_zas' => array(
+    'zas' => array(
         'nom' => "Zone Administrative de Surveillance",
         'colonne' => "id_geo_zas",
         'pcreg' => true,
         'pcdep' => false,
     ),
-    'grp_geo_uu' => array(
+    'uu' => array(
         'nom' => 'Unit&eacute; urbaine',
         'colonne' => "id_geo_uu",
         'pcreg' => true,
         'pcdep' => false
     ),
-    'grp_geo_com_com' => array(
+    'com_com' => array(
         'nom' => 'Communaut&eacute;',
         'colonne' => "id_geo_com_com",
         'pcreg' => true,
         'pcdep' => false
     ),
-    'grp_geo_commune' => array(
+    'commune' => array(
         'nom' => 'Commune',
         'colonne' => "id_geo_commune",
         'pcreg' => true,
