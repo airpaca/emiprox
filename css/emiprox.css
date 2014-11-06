@@ -1,8 +1,8 @@
 /*	Feuille de style Emiprox */
 
-* { font-size:10pt; font-family:"Trebuchet MS", Ubuntu, Verdana, Arial, Ubuntu; }
+* { font-size:12pt; font-family: Gudea, Ubuntu, Verdana, Arial; }
 html, body { text-align: center; }
-h1 { font-size: 1.75em; }
+h1 { font-size: 1.75em; font-weight: bold; }
 a { font-weight:bolder; color:#0067A1; text-decoration:none; }
 a:hover { color:#A6C7DA; text-decoration:underline; }
 img {border:0 none;}
@@ -12,7 +12,7 @@ img#logo { margin: 10px; }
 
 .emi_quantite { font-weight:bolder; font-size: 2em; }
 .emi_title { font-size: 1.75em; }
-.emi_src { color: #aaa; font-size: 11px; margin-bottom: 5px;  }
+.emi_src { color: #aaa; font-size: 10pt; margin-bottom: 5px;  }
 .emi_credit { color: #bbb; font-size: 12px; }
 
 div .form_geonm { font-size: 1em; margin-right: 5px; }

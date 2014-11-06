@@ -24,6 +24,9 @@ echo html_entity_decode($AASQA['nom'])." | ".html_entity_decode($AASQA['web'])."
 	
     <title>Emiprox | <?php echo $IE['nom']; ?></title>
 
+    <!-- Google font -->
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,700' rel='stylesheet' type='text/css'>
+    
     <!-- JQuery -->
     <script src="js/jquery-1.11.0.js" type="text/javascript"></script>
     
