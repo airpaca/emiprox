@@ -4,9 +4,9 @@
 
 // Nom et version de l'inventaire
 $IE = array(
-    'annee' => '2010',
-	'version' => 'a2010_v2013_v2', //'a2007_v2010_v2' | 'a2010_v2013_v1'
-	'nom' => 'Inventaire des &eacute;missions PACA 2010'
+    'annee' => '2012',
+	'version' => 'a2012_v2014_v1', // 'a2010_v2013_v2', 'a2007_v2010_v2' | 'a2010_v2013_v1'
+	'nom' => 'Inventaire des &eacute;missions PACA 2012'
 );
 
 // Nom de l'AASQA
@@ -31,51 +31,51 @@ $DESC = "Air PACA pr&eacute;sente ici les r&eacute;sultats du nouvel inventaire 
 //   'unite' => schéma de l'écriture du polluant : le caractére "*" sera remplacé par la quantité. Exemple : *, */an, * eq.CO2, ...
 $POLLUANTS = array(
     "NOx" => array(
-        'col' => "NOx kg/an", 
-        'html' => "NO<sub>x</sub>", 
-        'nom' => "Oxydes d'azote", 
+        'col' => "NOx kg/an",
+        'html' => "NO<sub>x</sub>",
+        'nom' => "Oxydes d'azote",
         'unite' => "*"
     ),
     "PM10" => array(
-        'col' => "PM10 kg/an", 
-        'html' => "PM10", 
-        'nom' => "Particules inf&eacute;rieures &agrave; 10 &micro;m", 
+        'col' => "PM10 kg/an",
+        'html' => "PM10",
+        'nom' => "Particules inf&eacute;rieures &agrave; 10 &micro;m",
         'unite' => "*"
     ),
     "PM2.5" => array(
-        'col' => "PM2.5 kg/an", 
-        'html' => "PM2.5", 
-        'nom' => "Particules inf&eacute;rieures &agrave; 2.5 &micro;m", 
+        'col' => "PM2.5 kg/an",
+        'html' => "PM2.5",
+        'nom' => "Particules inf&eacute;rieures &agrave; 2.5 &micro;m",
         'unite' => "*"
     ),
     "CO2" => array(
-        'col' => "CO2 kg/an", 
-        'html' => "CO<sub>2</sub>", 
-        'nom' => "Dioxyde de carbone", 
+        'col' => "CO2 kg/an",
+        'html' => "CO<sub>2</sub>",
+        'nom' => "Dioxyde de carbone",
         'unite' => "*"
     ),
     "GES" => array(
         'col' => "GES kg eq.CO2/an",
-        'html' => "GES", 
-        'nom' => "Gaz &agrave; Effet de Serre", 
+        'html' => "GES",
+        'nom' => "Gaz &agrave; Effet de Serre",
         'unite' => "* eq.CO2 "
     ),
     "CO" => array(
-        'col' => "CO kg/an", 
-        'html' => "CO", 
-        'nom' => "Monoxyde de carbone", 
+        'col' => "CO kg/an",
+        'html' => "CO",
+        'nom' => "Monoxyde de carbone",
         'unite' => "*"
     ),
     "SO2" => array(
-        'col' => "SO2 kg/an", 
-        'html' => "SO<sub>2</sub>", 
-        'nom' => "Dioxyde de soufre", 
+        'col' => "SO2 kg/an",
+        'html' => "SO<sub>2</sub>",
+        'nom' => "Dioxyde de soufre",
         'unite' => "*"
     ),
     "COVNM" => array(
-        'col' => "COVNM kg/an", 
-        'html' => "COVNM", 
-        'nom' => "Compos&eacute;s Organiques Volatils Non M&eacute;thaniques", 
+        'col' => "COVNM kg/an",
+        'html' => "COVNM",
+        'nom' => "Compos&eacute;s Organiques Volatils Non M&eacute;thaniques",
         'unite' => "*"
     )
 );
@@ -126,4 +126,3 @@ $PC = array(
         'pcdep' => true
     )
 );
-

@@ -4,6 +4,7 @@
 include("cfg/parametres.cfg.php");
 include("cfg/parametres.mysql.cfg.php");
 include("fonctions.inc.php");
+$debug = true;
 
 // Récupération des données passées dans l'URL ou via le formulaire
 if (array_key_exists('sent', $_POST)) {
@@ -12,8 +13,8 @@ if (array_key_exists('sent', $_POST)) {
     $annee = $_POST['annee'];
 }
 else {
-    $geo = $_GET['geo'];
-    $level_geo = $_GET['lvl'];
+    $level_geo = $_GET['geotyp'];
+    $geo = $_GET['geoid'];
     $annee = $_GET['annee'];
 }
 $list_polluants = array_keys($POLLUANTS);
@@ -25,17 +26,17 @@ mysql_select_db($DB);
 
 // Vérification
 if (!$geo) {
-    die("cannot find 'geo' arg !");
+    die("cannot find 'geoid' arg !");
 }
 if (!$level_geo) {
-    die("cannot find 'level_geo' arg !");
+    die("cannot find 'geotyp' arg !");
 }
 if (!$annee) {
     die("cannot find 'annee' arg !");
 }
 
 // Hack code commune !
-if (array_key_exists('geo', $_GET) && $level_geo == 'commune') {
+if (array_key_exists('geoid', $_GET) && $level_geo == 'commune') {
     $geo = '193'.$geo;
 }
 
@@ -52,7 +53,7 @@ echo "                <h3 class='emi_title'>".$nom_geo."</h3>\n";
 echo "            </div>\n";
 echo "        </div>\n";
 echo "        <!-- /.row -->\n";
-	
+
 // Variables intermédiaires
 $colonne = $PC[$level_geo]['colonne']; // lecture de la colonne de sélection
 $with_pcreg = $PC[$level_geo]['pcreg']; // présence du % région
@@ -66,7 +67,7 @@ while($enr = mysql_fetch_array($reponse)) {
     $sects[$enr[0]] = $enr[1];
 }
 
-// Composition de la requete d'extraction des émissions par secteur 
+// Composition de la requete d'extraction des émissions par secteur
 $sql = "SELECT g.`name` as `secteur`, ";
 foreach($POLLUANTS as $pol => $tpol) {
     $sql .= "COALESCE(e.`" . $pol . "`, 0) as `". $pol ."`, ";
@@ -78,7 +79,10 @@ foreach($POLLUANTS as $pol => $tpol) {
 }
 $sql = substr($sql, 0, -2);
 $sql .= " FROM `emi_total_".$IE['version']."` WHERE `".$colonne."` = '".$geo."' GROUP BY `".$SECTEUR['col']."`) e ON e.`".$SECTEUR['col']."` = g.`id` ORDER BY g.`name`";
-        
+if ($debug) {
+    echo "<!-- SQL = \n $sql \n -->";
+}
+
 // Extraction des données
 $data = array();
 $reponse = mysql_query($sql);
@@ -87,12 +91,12 @@ while($enr = mysql_fetch_array($reponse)) {
         $data[$pol][$enr[0]] = $enr[$pol];
     }
 }
-	
+
 // Calcul de la somme des émissions par polluants
 foreach($POLLUANTS as $pol => $tpol) {
     $sum[$pol] = array_sum($data[$pol]);
 }
-	
+
 // Extraction des émissions régionales totales si nécessaire
 if ($with_pcreg) {
     $sql = "SELECT ";
@@ -107,15 +111,15 @@ if ($with_pcreg) {
 else {
     $reg = null;
 }
-	
+
 // Extraction des émissions départementales totales
 if ($with_pcdep) {
     $code_dep = substr($geo, 1, 4); // extraction du code départment
-		
+
     $sql = "SELECT ";
     foreach($POLLUANTS as $pol => $tpol) {
         $sql .= "sum(`".$tpol['col']."`) as `".$pol."`, ";
-    }		
+    }
     $sql = substr($sql, 0, -2);
     $sql .= " FROM `emi_total_".$IE['version']."` WHERE `id_geo_dep` = '".$code_dep."'";
     $reponse = mysql_query($sql);
@@ -131,10 +135,10 @@ echo "        <div class=\"row text-center\">\n";
 
 // Affiche une cellules pour chaque polluant
 foreach($list_polluants as $ipol => $pol) {
-    
+
     // Information sur le polluant
     $tpol = $POLLUANTS[$pol];
-		
+
     // Calcul des %dep et %reg
     if ($with_pcreg) {
         $pcReg[$pol] = $sum[$pol] / $reg[$pol] * 100;
@@ -145,20 +149,20 @@ foreach($list_polluants as $ipol => $pol) {
             $precisionReg = 0;
         }
     }
-		
+
     if ($with_pcdep) {
         $pcDep[$pol][$code_dep] = $sum[$pol] / $dep[$code_dep][$pol] * 100;
         if ($pcDep[$pol][$code_dep] < 1) {
-            $precisionDep = 2; 
+            $precisionDep = 2;
         }
         else {
             $precisionDep = 0;
         }
     }
-		
+
     // Convertion quantité / unité
     $sumkg2o = kg2o($sum[$pol], $tpol['unite']);
-			
+
     // HTML
     echo "            <div class=\"col-md-6 col-sm-6 hero-feature\">\n";
     echo "                <div class=\"thumbnail\" style=\"text-align: center;\">\n";
@@ -169,7 +173,7 @@ foreach($list_polluants as $ipol => $pol) {
     echo "                    </div>\n";
     echo "                    <div id=\"chart_".$ipol."\" style=\"height: 300px; width: 90%;\"></div>\n";
     echo "                    <h3 class='emi_quantite'>".number_format($sumkg2o[0], 0, ',', ' ')." ".$sumkg2o[1]."</h3>\n";
-    
+
     if ($with_pcdep || $with_pcreg) {
         echo "                    <p>";
         if ($with_pcdep) {
@@ -182,17 +186,17 @@ foreach($list_polluants as $ipol => $pol) {
     }
     echo "                </div>\n";
     echo "            </div>\n";
-		
+
     // Mise en forme des données
     $gvaleurs = array();
     $glegend = array();
     $gpourcent = array();
     foreach($data[$pol] as $key => $val) {
-        $gvaleurs[] = round($val); 
+        $gvaleurs[] = round($val);
         $glegend[] = $key; //utf8_encode($key);
         $gpourcent[] = round(($val/$sum[$pol])*100);
     }
-          
+
     ?>
 
             <script>
@@ -227,11 +231,9 @@ foreach($list_polluants as $ipol => $pol) {
 }
 echo "        </div>\n";
 echo "        <!-- /.row -->";
-	
+
 // Déconnexion à MySQL
 mysql_close();
 
 // Fin de la page HTML
 include("fin.inc.php");
-
-
