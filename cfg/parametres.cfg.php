@@ -4,9 +4,9 @@
 
 // Nom et version de l'inventaire
 $IE = array(
-    'annee' => '2012',
-	'version' => 'a2012_v2014_v1', // 'a2010_v2013_v2', 'a2007_v2010_v2' | 'a2010_v2013_v1'
-	'nom' => 'Inventaire des &eacute;missions PACA 2012'
+    'annee' => '2013',
+	'version' => 'a2013_v2015_v1', // 'a2012_v2014_v1', 'a2010_v2013_v2', 'a2007_v2010_v2' | 'a2010_v2013_v1'
+	'nom' => 'Inventaire des &eacute;missions PACA 2013'
 );
 
 // Nom de l'AASQA

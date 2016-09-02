@@ -10,12 +10,12 @@ $debug = true;
 if (array_key_exists('sent', $_POST)) {
     $level_geo = $_POST['geotyp'];
     $geo = $_POST['geoid'];
-    $annee = $_POST['annee'];
+    //$annee = $_POST['annee'];
 }
 else {
     $level_geo = $_GET['geotyp'];
     $geo = $_GET['geoid'];
-    $annee = $_GET['annee'];
+    //$annee = $_GET['annee'];
 }
 $list_polluants = array_keys($POLLUANTS);
 // TODO: traitement de $annee !
@@ -31,14 +31,18 @@ if (!$geo) {
 if (!$level_geo) {
     die("cannot find 'geotyp' arg !");
 }
-if (!$annee) {
+/*if (!$annee) {
     die("cannot find 'annee' arg !");
-}
+}*/
 
-// Hack code commune !
+// Hack code geo !
 if (array_key_exists('geoid', $_GET) && $level_geo == 'commune') {
     $geo = '193'.$geo;
 }
+if (array_key_exists('geoid', $_GET) && $level_geo == 'dep') {
+    $geo = '93'.$geo;
+}
+
 
 // Entete HTML
 include("debut.inc.php");
@@ -164,12 +168,14 @@ foreach($list_polluants as $ipol => $pol) {
     $sumkg2o = kg2o($sum[$pol], $tpol['unite']);
 
     // HTML
+    //$html_annee = $annee == 'latest' ? $IE['annee'] : $annee;
+    $html_annee = $IE['annee'];
     echo "            <div class=\"col-md-6 col-sm-6 hero-feature\">\n";
     echo "                <div class=\"thumbnail\" style=\"text-align: center;\">\n";
     echo "                    <div class=\"caption\">\n";
     echo "                        <h3><span class=\"label label-default\">".$tpol['html']."</span></h3>\n";
     echo "                        <p><b>".$tpol['nom']."</b></p>\n";
-    echo "                        <div class='emi_src'>Inventaire des &eacute;missions ".$annee.", ".$AASQA['nom']."</div>\n";
+    echo "                        <div class='emi_src'>Inventaire des &eacute;missions ".$html_annee.", ".$AASQA['nom']."</div>\n";
     echo "                    </div>\n";
     echo "                    <div id=\"chart_".$ipol."\" style=\"height: 300px; width: 90%;\"></div>\n";
     echo "                    <h3 class='emi_quantite'>".number_format($sumkg2o[0], 0, ',', ' ')." ".$sumkg2o[1]."</h3>\n";

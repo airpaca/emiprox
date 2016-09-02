@@ -4,11 +4,11 @@
 
 // Connexion à MySQL
 $MYSQL = array(
-	'host' => '172.16.13.222',
-	'user' => 'myemissair',
-	'password' => 'MyEmissAir!?'
+	'host' => 'vmli-bdd',
+	'user' => 'application',
+	'password' => 'application'
 );
 
 // Nom de la base de données MyEmissair
-$DB = "myemissairv2";
+$DB = "myemissair";
 
