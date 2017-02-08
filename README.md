@@ -1,10 +1,22 @@
-Emiprox
-=======
+# Emiprox
 
-**Interface de consultation des résultats de l'inventaire des émissions**  
+[Interface de consultation des résultats de l'inventaire des émissions][Emiprox].
 
-Structure
----------
+
+## Aperçu
+
+### Page d'accueil
+
+![index](img/emiprox_index.png)
+
+
+### Page des résultats
+
+![resultat](img/emiprox_result.png)
+
+
+## Structure
+
 * `cfg/parametres.cfg.php` : fichier de configuration général.
 * `cfg/parametres.mysql.cfg.php` : fichier de configuration pour la connexion à la base de données.
 * `css/*.css` : fichiers de style.
@@ -17,15 +29,16 @@ Structure
 * `graph.php` : page des graphiques.
 * `index.php` : page principale (forulaire de saisie).
 
-Fonctionnement
---------------
+
+## Fonctionnement
 
 Deux modes de fonctionnement :
 * via la page principale par la saisie d'une zone géographique.
-* directement via l'URL de la page des graphiques (exemple : `graph.php?annee=2010&lvl=commune&geo=13002`) 
+* directement via l'URL de la page des graphiques (exemple : `graph.php?annee=2010&lvl=commune&geo=13002`)
 
-Ressources
----------
+
+## Ressources
+
 * [Bootstrap] pour la partie design/responsive web.
 * [JQuery].
 * [Selectize.js] pour la partie recherche de la page principale.
@@ -33,6 +46,7 @@ Ressources
 * [Google Fonts].
 
 
+[Emiprox]: http://emiprox.airpaca.org
 [Bootstrap]: http://getbootstrap.com/
 [JQuery]: http://jquery.com/
 [Selectize.js]: http://brianreavis.github.io/selectize.js/
