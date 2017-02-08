@@ -6,7 +6,7 @@ function kg2o($q, $modelunite) {
     $unite_p10 = array("kt" => 9, "t" => 6, "kg" => 3, "g" => 0, "mg" => -3, "&micro;g" => -6, "ng" => -9, "pg" => -12, "fg" => -15);
     $p10_unite = array_flip($unite_p10);
     $facteur10 = 0;
-	
+
     if ($q < 1) {
 	while (($q < 1) && ($unite != "fg")) {
             $q = $q * 1000;
@@ -32,3 +32,4 @@ function br2nl($string) {
     return preg_replace('/\<br(\s*)?\/?\>/i', "\n", $string);
 }
 
+?>

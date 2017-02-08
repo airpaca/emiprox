@@ -243,3 +243,5 @@ mysql_close();
 
 // Fin de la page HTML
 include("fin.inc.php");
+
+?>

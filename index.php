@@ -20,7 +20,7 @@ include("debut.inc.php");
         document.forms['formulaire'].geotyp.value = geotyp;
         document.forms['formulaire'].submit();
     }
-    
+
     // Efface le formulaire
     function cleanForm() {
         $select[0].selectize.clear();
@@ -90,3 +90,4 @@ mysql_close();
 // Fin de la page HTML
 include("fin.inc.php");
 
+?>

@@ -12,3 +12,4 @@ $MYSQL = array(
 // Nom de la base de données MyEmissair
 $DB = "myemissair";
 
+?>
